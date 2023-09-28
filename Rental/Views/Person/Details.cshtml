@@ -1,0 +1,30 @@
+﻿@model PersonModel
+@{
+    ViewData["Title"] = "Detale klienta";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary"><strong>@Model.FirstName @Model.LastName</strong></h1>
+            <h2 class="text-warning"><strong class="text-primary">Numer telefonu:</strong> @Model.TelephoneNumber</h2>
+        </div>
+    </div>
+
+    <h4 class="text-light m-3"><strong class="text-primary">PESEL:</strong> @Model.PESEL</h4>
+    <h4 class="text-light m-3"><strong class="text-primary">Numer dowodu osobistego:</strong> @Model.IDnumber</h4>
+    <h4 class="text-light m-3"><strong class="text-primary">Adres zamieszkania:</strong> @Model.City, @Model.Address</h4>
+    <h4 class="text-light m-3"><strong class="text-primary">Opis:</strong> @Model.Description</h4>
+
+    <div class="btn-group" role="group">
+        <a asp-controller="Person" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Powrót do listy
+        </a>
+        <a asp-controller="Person" asp-action="Edit" asp-route-id="@Model.PESEL" class="btn btn-primary mx-2">
+            <i class="bi bi-pencil-square"></i> &nbsp; Edytuj
+        </a>
+        <a asp-controller="Person" asp-action="Delete" asp-route-id="@Model.PESEL" class="btn btn-danger mx-1">
+            <i class="bi bi-trash3"></i>
+        </a>
+    </div>
+</div>

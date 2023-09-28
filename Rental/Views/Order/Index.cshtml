@@ -1,0 +1,59 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Spis aktualnych umów";
+}
+
+<form method="post">
+    <div class="container">
+        <div class="row">
+            @foreach (OrderModel obj in Model.Orders)
+            {
+                PersonModel person = Model.Persons.Find(obj.PersonPESEL);
+
+                if (obj.ItemID != null && !obj.Paid)
+                {
+                    ItemModel item = Model.Items.Find(obj.ItemID);
+                    <div class="box bg-primary d-flex m-3 border-secondary col-6">
+                        WYPOŻYCZENIE<br>
+                        @person.FirstName @person.LastName<br>
+                        @person.TelephoneNumber<br>
+                        @item.Name szt.@obj.Amount<br>
+                        Data wypożyczenia: @obj.LoanDate<br>
+                        <a asp-controller="Order" asp-action="Details" asp-route-id="@obj.OrderID" class="btn btn-secondary btn-order">
+                            <i class="bi bi-file-earmark-spreadsheet"></i> Finalizuj umowe
+                        </a>
+                    </div>
+                }
+
+                else if (!obj.Paid)
+                {
+                    <div class="box bg-secondary d-flex m-3 border-primary col-6">
+                        NAPRAWA<br>
+                        @person.FirstName @person.LastName<br>
+                        @person.TelephoneNumber<br>
+                        @obj.ItemNameForRepair szt. @obj.Amount<br>
+                        Data rozpoczęcia: @obj.LoanDate<br>
+                        <a asp-controller="Order" asp-action="DetailsRepair" asp-route-id="@obj.OrderID" class="btn btn-primary btn-order">
+                            <i class="bi bi-file-earmark-spreadsheet"></i> Finalizuj umowe
+                        </a>
+                    </div>
+                }
+
+            }
+        </div>
+    </div>
+
+    <div class="text-center m-5">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary m-5 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Powrót do strony głównej</div>
+        </a>
+    </div>
+</form>
+
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

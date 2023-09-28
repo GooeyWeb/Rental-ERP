@@ -1,0 +1,64 @@
+﻿@model PersonModel
+@{
+	ViewData["Title"] = "Rejestracja klienta";
+}
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Rejestracja klienta</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3">
+			<label asp-for="PESEL"></label>
+			<input asp-for="PESEL" maxlength="11" class="form-control" />
+			<span asp-validation-for="PESEL" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="IDnumber"></label>
+			<input asp-for="IDnumber" maxlength="9" class="form-control" />
+			<span asp-validation-for="IDnumber" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="FirstName"></label>
+			<input asp-for="FirstName" maxlength="25" class="form-control" />
+			<span asp-validation-for="FirstName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="LastName"></label>
+			<input asp-for="LastName" maxlength="50" class="form-control" />
+			<span asp-validation-for="LastName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="City"></label>
+			<input asp-for="City" maxlength="50" class="form-control" />
+			<span asp-validation-for="City" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Address"></label>
+			<input asp-for="Address" maxlength="100" class="form-control" />
+			<span asp-validation-for="Address" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="TelephoneNumber"></label>
+			<input asp-for="TelephoneNumber" type="number" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Description"></label>
+			<input asp-for="Description" maxlength="2000" placeholder="Tutaj możesz dodać uwagi na temat klienta." class="form-control" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Dodaj klienta</button>
+		<a asp-controller="Person" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Powrót do listy
+		</a>
+	</div>
+</form>
+
+@section Scripts
+	{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

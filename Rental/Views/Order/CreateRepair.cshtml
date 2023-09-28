@@ -1,0 +1,93 @@
+﻿@model IEnumerable<PersonModel>
+@{
+	ViewData["Title"] = "Tworzenie zamówienia";
+}
+<form class="d-flex my-5" method="get">
+    <input class="form-control me-sm-2" type="search" name="searchPerson" placeholder="Znajdź osobę...">
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit" value="Search">Szukaj</button>
+</form>
+
+<form method="post">
+    <table class="table table-bordered table-striped my-5">
+        <thead>
+            <tr>
+                <th>
+                    <i class="bi bi-person"></i> Imię
+                </th>
+                <th>
+                    Nazwisko
+                </th>
+                <th>
+                    Telefon
+                </th>
+                <th>
+                    PESEL
+                </th>
+                <th>
+                    <a asp-controller="Person" asp-action="Create" class="btn btn-primary py-1">
+                        <i class="bi bi-plus-circle"></i>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PersonModel obj in Model)
+            {
+                <tr>
+                    <td width="20%">
+                        @obj.FirstName
+                    </td>
+                    <td width="20%">
+                        @obj.LastName
+                    </td>
+                    <td width="20%">
+                        @obj.TelephoneNumber
+                    </td>
+                    <td width="20%">
+                        @obj.PESEL
+                    </td>
+                    <td width="1%">
+                        <input class="form-check-input mx-3" type="radio" name="pesel" value="@obj.PESEL" checked="">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center m-5">
+        <div class="mb-3">
+            <label>Nazwa sprzętu do naprawy:</label>
+            <input name="item" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Ilość sprzętu do naprawy:</label>
+            <input name="amount" type="number" min="1" value="1" step="1" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Zaliczka:</label>
+            <input name="advance" type="number" min="0" value="0" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Szacowany koszt:</label>
+            <input name="cost" type="number" min="0" value="0" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary m-5 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Dodaj zlecenie naprawy</div>
+        </button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary m-5 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Powrót do strony głównej</div>
+        </a>
+    </div>
+</form>
+
+
+@section Scripts
+	{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

@@ -1,0 +1,34 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Szczegóły umowy";
+}
+
+<form method="post">
+    <div class="text-center my-4">
+        <h1>@Model.Person.FirstName @Model.Person.LastName</h1>
+        <h3>Numer telefonu: @Model.Person.TelephoneNumber</h3>
+        <h4>Sprzęt do naprawy: <strong class="text-primary">@Model.Order.ItemNameForRepair</strong> szt. <strong class="text-primary">@Model.Order.Amount</strong></h4>
+        <h5>Szacowane koszta: <strong class="text-success">@Model.Order.Cost PLN</strong></h5>
+        <div class="mb-3">
+            <input type="number" step="0.01" name="cost" value="@Model.Order.Cost" class="form-control" style="width: 50%; margin-left: 25%" />
+        </div>
+        <h5>Data dostarczenia sprzętu: @Model.Order.LoanDate</h5>
+        <h5>Wpłacona zaliczka <strong class="text-primary">@Model.Order.Advance PLN</strong></h5>
+    </div>
+
+    <div class="text-center m-5">
+        <a asp-controller="Order" asp-action="DetailsRepairPaid" asp-route-order="@Model.Order" class="btn btn-primary my-1 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Zatwierdź zapłatę</div>
+        </a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary my-1 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Powrót do strony głównej</div>
+        </a>
+    </div>
+</form>
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

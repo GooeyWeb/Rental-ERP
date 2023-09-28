@@ -1,0 +1,43 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Szczegóły umowy";
+}
+
+<form method="post">
+    <div class="text-center my-4">
+        <h1>@Model.Person.FirstName @Model.Person.LastName</h1>
+        <h3>Numer telefonu: @Model.Person.TelephoneNumber</h3>
+        <h4>Wypożyczony sprzęt: <strong class="text-primary">@Model.Item.Name</strong> szt. <strong class="text-primary">@Model.Order.Amount</strong></h4>
+        <h5>
+            @if(Model.Order.CostPerHour > 0)
+            {
+                <div>Cena za godzinę: <strong class="text-primary">@Model.Order.CostPerHour PLN</strong> |</div>
+            }
+            Cena za dzień: <strong class="text-primary">@Model.Order.CostPerDay PLN</strong>
+        </h5>
+        <h5>Data wypożyczenia: @Model.Order.LoanDate</h5>
+        <h5>Wpłacona zaliczka <strong class="text-primary">@Model.Order.Advance PLN</strong></h5>
+        
+        <br />
+        <h3>Data zwrotu: @Model.Today</h3>
+        <h3>Należność: <strong class="text-success">@Model.Cost PLN</strong></h3>
+    </div>
+    
+
+    <div class="text-center m-5">
+        <a asp-controller="Order" asp-action="Details" asp-route-order="@Model.Order" asp-route-cost="@Model.Cost" asp-route-item="@Model.Item" class="btn btn-primary my-1 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Zatwierdź zapłatę</div>
+        </a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary my-1 fw-bold fs-1" style="width:70%; height:150px">
+            <div style="padding:5%">Powrót do strony głównej</div>
+        </a>
+    </div>
+</form>
+
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
